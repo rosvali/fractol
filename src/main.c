@@ -19,9 +19,12 @@ int		main(int argc, char **argv)
 	if (argc == 2)
 	{
 		if (!(var = malloc(sizeof(t_var))))
-		return (0);
+			return (0);
 		var->name = argv[1];
-		fractol(var);
+		if (ft_strcmp("mandelbrot", var->name) == 0)
+			fractol(var);
+		else
+			write(1, "fractol: usage: 'mandelbrot'\n", 29);
 	}
 	else
 		write(1, "fractol: usage: 'mandelbrot'\n", 29);

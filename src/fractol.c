@@ -12,18 +12,22 @@
 
 #include "../includes/fractol.h"
 
+int		keyhook(int keycode, t_var *var)
+{
+	//printf("%d\n", keycode);
+	if (keycode == 53)
+		exit(0);
+	return (0);
+}
+
 void	initvar(t_var *var)
 {
-	var->pixel.pr = 0;
-	var->pixel.pi = 0;
-	var->pixel.newr = 0;
-	var->pixel.newi = 0;
-	var->pixel.oldr = 0;
-	var->pixel.oldi = 0;
-	var->pixel.zoom = 1;
-	var->pixel.movex = -0.5;
-	var->pixel.movey = 0;
-	var->pixel.maxi = HEIGHT;
+	var->px.pr = 0;
+	var->px.pi = 0;
+	var->px.ci = 0;
+	var->px.cr = 0;
+	var->px.zoom = 1;
+	var->px.tmp = 0;
 }
 
 void	fractol(t_var *var)
@@ -33,7 +37,8 @@ void	fractol(t_var *var)
 	var->mlx.img_ptr = mlx_new_image(var->mlx.ptr, WIDTH, HEIGHT);
 	var->mlx.img_data = (int *)mlx_get_data_addr(var->mlx.img_ptr,
 		&var->mlx.img_bpp, &var->mlx.img_size_l, &var->mlx.img_endian);
-	//mandelbrot(var);
+	mandelbrot(var);
+	mlx_key_hook(var->mlx.window, keyhook, var);
 	mlx_put_image_to_window(var->mlx.ptr, var->mlx.window, var->mlx.img_ptr, 0, 0);
 	mlx_loop(var->mlx.ptr);
 }
@@ -48,24 +53,24 @@ void	mandelbrot(t_var *var)
 	y = 0;
 	i = 0;
 	initvar(var);
-	printf("ok");
-	while (y++ < HEIGHT)
+	while (y < HEIGHT)
 	{
-		while (x++ < WIDTH)
+		while (x < WIDTH)
 		{
-			var->pixel.pr = 1.5 * (x - WIDTH / 2) / (0.5 * var->pixel.zoom * WIDTH) + var->pixel.movex;
-			var->pixel.pi = (y - HEIGHT / 2) / (0.5 * var->pixel.zoom * HEIGHT) + var->pixel.movey;
-			while (i < var->pixel.maxi)
+			var->px.cr = (x - WIDTH) / (var->px.zoom * WIDTH);
+			var->px.ci = (y - HEIGHT) / (var->px.zoom * HEIGHT);
+			while (i < HEIGHT)
 			{
-				var->pixel.oldr = var->pixel.newr;
-				var->pixel.oldi = var->pixel.newi;
-				var->pixel.newr = var->pixel.oldr * var->pixel.oldr - var->pixel.oldi + var->pixel.pr;
-				var->pixel.newi = 2 * var->pixel.oldr * var->pixel.oldi + var->pixel.pi;
-				if ((var->pixel.newr + var->pixel.newi) > 2)
-					break ;
+				var->px.tmp = var->px.pr * var->px.pr - var->px.pi * var->px.pi + var->px.cr;
+				var->px.pi = var->px.pr * var->px.pi + var->px.pr * var->px.pi + var->px.ci;
+				var->px.pr = var->px.tmp;
+				i++;
 			}
-			var->mlx.img_data[y + x] = 0xFFFFFF;
-			printf("%d\n", y + x);
+			var->mlx.img_data[y * WIDTH + x] = 0xFFFFFF;
+			x++;
 		}
+		y++;
+		x = 0;
+		i = 0;
 	}
 }

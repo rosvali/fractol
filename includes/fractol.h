@@ -13,13 +13,9 @@
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# include <math.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
 # include <stdio.h>
+# include <math.h>
+# include "../lib/libft/libft.h"
 # include "../lib/minilibx/mlx.h"
 # define HEIGHT 720
 # define WIDTH 1080
@@ -37,29 +33,26 @@ typedef struct	s_mlx
 	int		img_size_l;
 }				t_mlx;
 
-typedef struct	s_pixel
+typedef struct	s_px
 {
-	int		pr;
-	int		pi;
-	int		newr;
-	int		newi;
-	int		oldr;
-	int		oldi;
-	int		zoom;
-	double		movex;
-	double		movey;
-	int		maxi;
-}				t_pixel;
+	int			pr;
+	int			pi;
+	int			cr;
+	int			ci;
+	int			zoom;
+	int			tmp;
+}				t_px;
 
 typedef struct	s_var
 {
 	t_mlx	mlx;
-	t_pixel	pixel;
+	t_px	px;
 	char	*name;
 }				t_var;
 
 void	initvar(t_var *var);
 void	fractol(t_var *var);
 void	mandelbrot(t_var *var);
+int		keyhook(int keycode, t_var *var);
 
 #endif
