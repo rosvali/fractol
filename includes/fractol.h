@@ -33,20 +33,30 @@ typedef struct	s_mlx
 	int		img_size_l;
 }				t_mlx;
 
-typedef struct	s_px
-{
-	int			pr;
-	int			pi;
-	int			cr;
-	int			ci;
-	int			zoom;
-	int			tmp;
-}				t_px;
+// typedef struct	s_px
+// {
+// 	int			cx;
+// 	int			cy;
+// 	int			zx;
+// 	int			zy;
+// 	int			zoom;
+// 	int			tmp;
+// 	int			i;
+// }				t_px;
 
 typedef struct	s_var
 {
 	t_mlx	mlx;
-	t_px	px;
+	int		x;
+	int		y;
+	int		cx;
+	int		cy;
+	int		zx;
+	int		zy;
+	int		zoom;
+	int		tmp;
+	int		i;
+	int		maxi;
 	char	*name;
 }				t_var;
 

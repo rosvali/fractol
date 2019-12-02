@@ -6,7 +6,7 @@
 /*   By: raguillo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 15:19:07 by raguillo          #+#    #+#             */
-/*   Updated: 2019/09/18 15:20:06 by raguillo         ###   ########.fr       */
+/*   Updated: 2019/11/21 14:45:02 by raguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,16 @@ int		keyhook(int keycode, t_var *var)
 
 void	initvar(t_var *var)
 {
-	var->px.pr = 0;
-	var->px.pi = 0;
-	var->px.ci = 0;
-	var->px.cr = 0;
-	var->px.zoom = 1;
-	var->px.tmp = 0;
+	var->x = 0;
+	var->y = 0;
+	var->zx = 0;
+	var->zy = 0;
+	var->cx = 0;
+	var->cy = 0;
+	var->zoom = 100;
+	var->tmp = 0;
+	var->i = 0;
+	var->maxi = 50;
 }
 
 void	fractol(t_var *var)
@@ -43,34 +47,60 @@ void	fractol(t_var *var)
 	mlx_loop(var->mlx.ptr);
 }
 
+static void	black(t_var *var)
+{
+	var->mlx.img_data[((int)(var->y * WIDTH + (int)var->x) * 4) + 2] = 0;
+	var->mlx.img_data[(((int)var->y * WIDTH + (int)var->x) * 4) + 1] = 0;
+	var->mlx.img_data[(((int)var->y * WIDTH + (int)var->x) * 4)] = 0;
+}
+
+static void	color(t_var *var)
+{
+	unsigned char r;
+	unsigned char g;
+	unsigned char b;
+
+	r = (var->i * 255) / var->maxi;
+	g = (var->i * 255) / var->maxi;
+	b = (var->i * 255) / var->maxi;
+	var->mlx.img_data[((int)(var->y * WIDTH + (int)var->x) * 4) + 2] = r;
+	var->mlx.img_data[(((int)var->y * WIDTH + (int)var->x) * 4) + 1] = g;
+	var->mlx.img_data[((int)(var->y * WIDTH + (int)var->x) * 4)] = b;
+}
+
 void	mandelbrot(t_var *var)
 {
-	int		x;
-	int		y;
-	int		i;
-
-	x = 0;
-	y = 0;
-	i = 0;
+	double x1 = -2.1;
+	double x2 = 0.6;
+	double y1 = -1.2;
+	double y2 = 1.2;
+	int k = 0;
 	initvar(var);
-	while (y < HEIGHT)
+	while (var->x < WIDTH)
 	{
-		while (x < WIDTH)
+		var->y = 0;
+		while (var->y < HEIGHT)
 		{
-			var->px.cr = (x - WIDTH) / (var->px.zoom * WIDTH);
-			var->px.ci = (y - HEIGHT) / (var->px.zoom * HEIGHT);
-			while (i < HEIGHT)
+			var->cx = var->x / var->zoom + x1;
+			var->cy = var->y / var->zoom + y1;
+			var->i = 0;
+			var->zx = 0;
+			var->zy = 0;
+			while (var->zx * var->zx + var->zy * var->zy < 4 && var->i < var->maxi)
 			{
-				var->px.tmp = var->px.pr * var->px.pr - var->px.pi * var->px.pi + var->px.cr;
-				var->px.pi = var->px.pr * var->px.pi + var->px.pr * var->px.pi + var->px.ci;
-				var->px.pr = var->px.tmp;
-				i++;
+				var->tmp = var->zx;
+				var->zx = var->zx * var->zx - var->zy * var->zy + var->cx;
+				var->zy = 2 * var->zy * var->tmp + var->cy;
+				var->i = var->i + 1;
 			}
-			var->mlx.img_data[y * WIDTH + x] = 0xFFFFFF;
-			x++;
+			printf("%d(%d)\n", var->i, k);
+			k++;
+			if (var->i == var->maxi)
+				black(var);
+			else
+				color(var);
+			var->y++;
 		}
-		y++;
-		x = 0;
-		i = 0;
+		var->x++;
 	}
 }
