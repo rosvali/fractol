@@ -20,8 +20,6 @@
 # define HEIGHT 720
 # define WIDTH 1080
 
-
-
 typedef struct	s_mlx
 {
 	void	*ptr;
@@ -33,28 +31,17 @@ typedef struct	s_mlx
 	int		img_size_l;
 }				t_mlx;
 
-// typedef struct	s_px
-// {
-// 	int			cx;
-// 	int			cy;
-// 	int			zx;
-// 	int			zy;
-// 	int			zoom;
-// 	int			tmp;
-// 	int			i;
-// }				t_px;
-
 typedef struct	s_var
 {
 	t_mlx	mlx;
-	int		x;
-	int		y;
-	int		cx;
-	int		cy;
-	int		zx;
-	int		zy;
-	int		zoom;
-	int		tmp;
+	double	x;
+	double	y;
+	double	zx;
+	double	zy;
+	double	cx;
+	double	cy;
+	double	zoom;
+	double	tmp;
 	int		i;
 	int		maxi;
 	char	*name;

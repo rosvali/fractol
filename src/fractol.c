@@ -28,7 +28,7 @@ void	initvar(t_var *var)
 	var->zy = 0;
 	var->cx = 0;
 	var->cy = 0;
-	var->zoom = 100;
+	var->zoom = 1;
 	var->tmp = 0;
 	var->i = 0;
 	var->maxi = 50;
@@ -49,9 +49,9 @@ void	fractol(t_var *var)
 
 static void	black(t_var *var)
 {
-	var->mlx.img_data[((int)(var->y * WIDTH + (int)var->x) * 4) + 2] = 0;
-	var->mlx.img_data[(((int)var->y * WIDTH + (int)var->x) * 4) + 1] = 0;
-	var->mlx.img_data[(((int)var->y * WIDTH + (int)var->x) * 4)] = 0;
+	var->mlx.img_data[((int)(var->y * WIDTH + (int)var->x)) + 2] = 0;
+	var->mlx.img_data[(((int)var->y * WIDTH + (int)var->x)) + 1] = 0;
+	var->mlx.img_data[(((int)var->y * WIDTH + (int)var->x))] = 0;
 }
 
 static void	color(t_var *var)
@@ -63,38 +63,36 @@ static void	color(t_var *var)
 	r = (var->i * 255) / var->maxi;
 	g = (var->i * 255) / var->maxi;
 	b = (var->i * 255) / var->maxi;
-	var->mlx.img_data[((int)(var->y * WIDTH + (int)var->x) * 4) + 2] = r;
-	var->mlx.img_data[(((int)var->y * WIDTH + (int)var->x) * 4) + 1] = g;
-	var->mlx.img_data[((int)(var->y * WIDTH + (int)var->x) * 4)] = b;
+	var->mlx.img_data[((int)(var->y * WIDTH + (int)var->x)) + 2] = r;
+	var->mlx.img_data[(((int)var->y * WIDTH + (int)var->x)) + 1] = g;
+	var->mlx.img_data[((int)(var->y * WIDTH + (int)var->x))] = b;
 }
 
 void	mandelbrot(t_var *var)
 {
-	double x1 = -2.1;
-	double x2 = 0.6;
-	double y1 = -1.2;
-	double y2 = 1.2;
-	int k = 0;
 	initvar(var);
 	while (var->x < WIDTH)
 	{
 		var->y = 0;
 		while (var->y < HEIGHT)
 		{
-			var->cx = var->x / var->zoom + x1;
-			var->cy = var->y / var->zoom + y1;
+			var->cx = (var->x - WIDTH) / (var->zoom * WIDTH);
+			var->cy = (var->y - HEIGHT) / (var->zoom * HEIGHT);
 			var->i = 0;
 			var->zx = 0;
 			var->zy = 0;
 			while (var->zx * var->zx + var->zy * var->zy < 4 && var->i < var->maxi)
 			{
-				var->tmp = var->zx;
-				var->zx = var->zx * var->zx - var->zy * var->zy + var->cx;
-				var->zy = 2 * var->zy * var->tmp + var->cy;
+				// var->tmp = var->zx;
+				// var->zx = var->zx * var->zx - var->zy * var->zy + var->cx;
+				// var->zy = 2 * var->zy * var->tmp + var->cy;
+				// var->i = var->i + 1;
+
+				var->tmp = var->zx * var->zx - var->zy * var->zy + var->cx;
+				var->zy = var->zx * var->zy + var->zx * var->zy + var->cy;
+				var->zx = var->tmp;
 				var->i = var->i + 1;
 			}
-			printf("%d(%d)\n", var->i, k);
-			k++;
 			if (var->i == var->maxi)
 				black(var);
 			else
