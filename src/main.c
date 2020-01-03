@@ -21,6 +21,7 @@ int		main(int argc, char **argv)
 		if (!(var = malloc(sizeof(t_var))))
 			return (0);
 		var->name = argv[1];
+		var->zoom = 1;
 		if (ft_strcmp("mandelbrot", var->name) == 0)
 			fractol(var);
 		else

@@ -34,8 +34,8 @@ typedef struct	s_mlx
 typedef struct	s_var
 {
 	t_mlx	mlx;
-	double	x;
-	double	y;
+	int		x_off;
+	int		y_off;
 	double	zx;
 	double	zy;
 	double	cx;
@@ -51,5 +51,8 @@ void	initvar(t_var *var);
 void	fractol(t_var *var);
 void	mandelbrot(t_var *var);
 int		keyhook(int keycode, t_var *var);
+int		loop_hook(t_var *var);
+void	black(t_var *var, int x, int y);
+void	color(t_var *vari, int x, int y);
 
 #endif
