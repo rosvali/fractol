@@ -2,11 +2,11 @@
 
 int		loop_hook(t_var *var)
 {
-	mandelbrot(var);
+	draw(var);
 	mlx_put_image_to_window(var->mlx.ptr, var->mlx.window, var->mlx.img_ptr, 0, 0);
 	return (0);
 }
-
+ 
 int		keyhook(int keycode, t_var *var)
 {
 	//printf("%d\n", keycode);

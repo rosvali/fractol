@@ -23,12 +23,12 @@ int		main(int argc, char **argv)
 		var->name = argv[1];
 		var->zoom = 0.3;
 		init_off(var);
-		if (ft_strcmp("mandelbrot", var->name) == 0)
+		if (ft_strcmp("mandelbrot", var->name) == 0 || ft_strcmp("burningship", var->name) == 0 || ft_strcmp("julia", var->name) == 0)
 			fractol(var);
 		else
-			write(1, "fractol: usage: 'mandelbrot'\n", 29);
+			write(1, "fractol: usage: 'mandelbrot' 'burningship' or 'julia'\n", 55);
 	}
 	else
-		write(1, "fractol: usage: 'mandelbrot'\n", 29);
+		write(1, "fractol: usage: 'mandelbrot' 'burningship' or 'julia'\n", 55);
 	return (0);
 }

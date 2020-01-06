@@ -55,5 +55,9 @@ void	black(t_var *var, int x, int y);
 void	color(t_var *vari, int x, int y);
 int		keyhook(int keycode, t_var *var);
 int		loop_hook(t_var *var);
+void	burningship(t_var *var);
+double	ft_abs(double nbr);
+void	draw(t_var *var);
+void	julia(t_var *var);
 
 #endif
