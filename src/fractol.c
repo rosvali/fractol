@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
- 
+
 void	initvar(t_var *var)
 {
 	var->zx = 0;
@@ -40,6 +40,8 @@ void	init_off(t_var *var)
 		var->x_off = 1.6;
 		var->y_off = 1.6;
 	}
+	var->xmouse = 0;
+	var->ymouse = 0;
 }
 
 void	fractol(t_var *var)
@@ -49,19 +51,10 @@ void	fractol(t_var *var)
 	var->mlx.img_ptr = mlx_new_image(var->mlx.ptr, WIDTH, HEIGHT);
 	var->mlx.img_data = (int *)mlx_get_data_addr(var->mlx.img_ptr,
 		&var->mlx.img_bpp, &var->mlx.img_size_l, &var->mlx.img_endian);
-	mlx_key_hook(var->mlx.window, keyhook, var);
+	mlx_key_hook(var->mlx.window, key_hook, var);
+	mlx_mouse_hook(var->mlx.window, mouse_hook, var);
 	draw(var);
 	mlx_put_image_to_window(var->mlx.ptr, var->mlx.window, var->mlx.img_ptr, 0, 0);
 	mlx_loop_hook(var->mlx.ptr, loop_hook, var);
 	mlx_loop(var->mlx.ptr);
-}
-
-void	draw(t_var *var)
-{
-	if (ft_strcmp(var->name, "mandelbrot") == 0)
-		mandelbrot(var);
-	else if (ft_strcmp(var->name, "burningship") == 0)
-		burningship(var);
-	else if (ft_strcmp(var->name, "julia") == 0)
-		julia(var);
 }

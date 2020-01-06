@@ -45,19 +45,31 @@ typedef struct	s_var
 	int		i;
 	int		maxi;
 	char	*name;
+	int		xmouse;
+	int		ymouse;
 }				t_var;
 
+/*
+** draw.c
+*/
+double	ft_abs(double nbr);
+void	mandelbrot(t_var *var);
+void	burningship(t_var *var);
+void	julia(t_var *var);
+void	draw(t_var *var);
+/*
+** fractol.c
+*/
 void	initvar(t_var *var);
 void	init_off(t_var *var);
 void	fractol(t_var *var);
-void	mandelbrot(t_var *var);
+/*
+** hook.c
+*/
 void	black(t_var *var, int x, int y);
 void	color(t_var *vari, int x, int y);
-int		keyhook(int keycode, t_var *var);
+int		key_hook(int keycode, t_var *var);
 int		loop_hook(t_var *var);
-void	burningship(t_var *var);
-double	ft_abs(double nbr);
-void	draw(t_var *var);
-void	julia(t_var *var);
+int		mouse_hook(int button, int x, int y, t_var *var);
 
 #endif

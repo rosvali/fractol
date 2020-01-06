@@ -8,27 +8,6 @@ double		ft_abs(double nbr)
 		return (nbr);
 }
 
-void	black(t_var *var, int x, int y)
-{
-	var->mlx.img_data[((int)(y * WIDTH + (int)x)) + 2] = 0;
-	var->mlx.img_data[(((int)y * WIDTH + (int)x)) + 1] = 0;
-	var->mlx.img_data[(((int)y * WIDTH + (int)x))] = 0;
-}
-
-void	color(t_var *var, int x, int y)
-{
-	unsigned char r;
-	unsigned char g;
-	unsigned char b;
-
-	r = (var->i * 255) / (var->maxi * 1);
-	g = (var->i * 255) / (var->maxi * 1);
-	b = (var->i * 255) / (var->maxi * 1);
-	var->mlx.img_data[((int)(y * WIDTH + (int)x)) + 2] = r;
-	var->mlx.img_data[(((int)y * WIDTH + (int)x)) + 1] = g;
-	var->mlx.img_data[((int)(y * WIDTH + (int)x))] = b;
-}
-
 void	mandelbrot(t_var *var)
 {
 	int		x;
@@ -115,8 +94,8 @@ void	julia(t_var *var)
 			var->cx = -0.7;
 			var->cy = 0.27015;
 			var->i = 0;
-			var->zx = (x - WIDTH) / (var->zoom * WIDTH) + var->x_off;
-			var->zy = (y - HEIGHT) / (var->zoom * HEIGHT) + var->y_off;
+			var->zx = var->xmouse - (x - WIDTH) / (var->zoom * WIDTH) + var->x_off;
+			var->zy = var->ymouse - (y - HEIGHT) / (var->zoom * HEIGHT) + var->y_off;
 			while (var->zx * var->zx + var->zy * var->zy < 4 && var->i < var->maxi)
 			{
 				var->tmp = var->zx * var->zx - var->zy * var->zy + var->cx;
@@ -132,4 +111,14 @@ void	julia(t_var *var)
 		}
 		x++;
 	}
+}
+
+void	draw(t_var *var)
+{
+	if (ft_strcmp(var->name, "mandelbrot") == 0)
+		mandelbrot(var);
+	else if (ft_strcmp(var->name, "burningship") == 0)
+		burningship(var);
+	else if (ft_strcmp(var->name, "julia") == 0)
+		julia(var);
 }
