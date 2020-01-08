@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: raguillo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/08 10:59:30 by raguillo          #+#    #+#             */
+/*   Updated: 2020/01/08 10:59:37 by raguillo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/fractol.h"
 
 double		ft_abs(double nbr)
@@ -8,112 +20,31 @@ double		ft_abs(double nbr)
 		return (nbr);
 }
 
-void	mandelbrot(t_var *var)
+void		black(t_var *var, int x, int y)
 {
-	int		x;
-	int		y;
-
-	x = 0;
-	y = 0;
-	initvar(var);
-	while (x < WIDTH)
-	{
-		y = 0;
-		while (y < HEIGHT)
-		{
-			var->cx = (x - WIDTH) / (var->zoom * WIDTH) + var->x_off;
-			var->cy = (y - HEIGHT) / (var->zoom * HEIGHT) + var->y_off;
-			var->i = 0;
-			var->zx = var->cx;
-			var->zy = var->cy;
-			while (var->zx * var->zx + var->zy * var->zy < 4 && var->i < var->maxi)
-			{
-				var->tmp = var->zx * var->zx - var->zy * var->zy + var->cx;
-				var->zy = var->zx * var->zy + var->zx * var->zy + var->cy;
-				var->zx = var->tmp;
-				var->i = var->i + 1;
-			}
-			if (var->i == var->maxi)
-				black(var, x, y);
-			else
-				color(var, x, y);
-			y++;
-		}
-		x++;
-	} 
+	var->mlx.img_data[((y * WIDTH + x)) + 2] = 0;
+	var->mlx.img_data[((y * WIDTH + x)) + 1] = 0;
+	var->mlx.img_data[((y * WIDTH + x))] = 0;
 }
 
-void	burningship(t_var *var)
+void		color(t_var *var, int x, int y)
 {
-	int		x;
-	int		y;
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
 
-	x = 0;
-	y = 0;
-	initvar(var);
-	while (x < WIDTH)
-	{
-		y = 0;
-		while (y < HEIGHT)
-		{
-			var->cx = (x - WIDTH) / (var->zoom * WIDTH) + var->x_off;
-			var->cy = (y - HEIGHT) / (var->zoom * HEIGHT) + var->y_off;
-			var->i = 0;
-			var->zx = var->cx;
-			var->zy = var->cy;
-			while (var->zx * var->zx + var->zy * var->zy < 4 && var->i < var->maxi)
-			{
-				var->tmp = var->zy;
-				var->zy = ft_abs(var->zx * var->zy + var->zx * var->zy) + var->cy;
-				var->zx = var->zx * var->zx - var->tmp * var->tmp + var->cx;
-				var->i = var->i + 1;
-			}
-			if (var->i == var->maxi)
-				black(var, x, y);
-			else
-				color(var, x, y);
-			y++;
-		}
-		x++;
-	}
+	// color->data[(((int)color->y * WIDTH + (int)color->x) * 4) + 2] = r;
+	// color->data[(((int)color->y * WIDTH + (int)color->x) * 4) + 1] = g;
+	// color->data[(((int)color->y * WIDTH + (int)color->x) * 4)] = b;
+	r = ((var->i * 255) / (var->maxi));
+	g = ((var->i * 255) / (var->maxi));
+	b = ((var->i * 255) / (var->maxi));
+	var->mlx.img_data[((y * WIDTH + x))] = r;
+	var->mlx.img_data[((y * WIDTH + x)) + 1] = g;
+	var->mlx.img_data[((y * WIDTH + x)) + 2] = b;
 }
 
-void	julia(t_var *var)
-{
-	int		x;
-	int		y;
-
-	x = 0;
-	y = 0;
-	initvar(var);
-	while (x < WIDTH)
-	{
-		y = 0;
-		while (y < HEIGHT)
-		{
-			var->cx = -0.7;
-			var->cy = 0.27015;
-			var->i = 0;
-			var->zx = (x - WIDTH) / (var->zoom * WIDTH) + var->x_off;
-			var->zy = (y - HEIGHT) / (var->zoom * HEIGHT) + var->y_off;
-			while (var->zx * var->zx + var->zy * var->zy < 4 && var->i < var->maxi)
-			{
-				var->tmp = var->zx * var->zx - var->zy * var->zy + var->cx;
-				var->zy = var->zx * var->zy + var->zx * var->zy + var->cy;
-				var->zx = var->tmp;
-				var->i = var->i + 1;
-			}
-			if (var->i == var->maxi)
-				black(var, x, y);
-			else
-				color(var, x, y);
-			y++;
-		}
-		x++;
-	}
-}
-
-void	draw(t_var *var)
+void		draw(t_var *var)
 {
 	if (ft_strcmp(var->name, "mandelbrot") == 0)
 		mandelbrot(var);

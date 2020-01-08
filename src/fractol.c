@@ -12,7 +12,7 @@
 
 #include "../includes/fractol.h"
 
-void	initvar(t_var *var)
+void	init_var(t_var *var)
 {
 	var->zx = 0;
 	var->zy = 0;
@@ -20,7 +20,6 @@ void	initvar(t_var *var)
 	var->cy = 0;
 	var->tmp = 0;
 	var->i = 0;
-	var->r = 0;
 	var->maxi = 50;
 }
 
@@ -41,8 +40,6 @@ void	init_off(t_var *var)
 		var->x_off = 1.6;
 		var->y_off = 1.6;
 	}
-	var->xmouse = 0;
-	var->ymouse = 0;
 }
 
 void	fractol(t_var *var)
@@ -55,7 +52,8 @@ void	fractol(t_var *var)
 	mlx_key_hook(var->mlx.window, key_hook, var);
 	mlx_mouse_hook(var->mlx.window, mouse_hook, var);
 	draw(var);
-	mlx_put_image_to_window(var->mlx.ptr, var->mlx.window, var->mlx.img_ptr, 0, 0);
+	mlx_put_image_to_window(var->mlx.ptr, var->mlx.window,
+		var->mlx.img_ptr, 0, 0);
 	mlx_loop_hook(var->mlx.ptr, loop_hook, var);
 	mlx_loop(var->mlx.ptr);
 }

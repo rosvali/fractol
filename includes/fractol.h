@@ -17,8 +17,8 @@
 # include <math.h>
 # include "../lib/libft/libft.h"
 # include "../lib/minilibx/mlx.h"
-# define HEIGHT 720
-# define WIDTH 1080
+# define HEIGHT 1000
+# define WIDTH 1000
 
 typedef struct	s_mlx
 {
@@ -45,32 +45,45 @@ typedef struct	s_var
 	int		i;
 	int		maxi;
 	char	*name;
-	int		xmouse;
-	int		ymouse;
-	int		r;
 }				t_var;
+
+/*
+** burningship.c
+*/
+void			burningship(t_var *var);
+void			burningship_algo(t_var *var);
 
 /*
 ** draw.c
 */
-double	ft_abs(double nbr);
-void	mandelbrot(t_var *var);
-void	burningship(t_var *var);
-void	julia(t_var *var);
-void	draw(t_var *var);
+double			ft_abs(double nbr);
+void			black(t_var *var, int x, int y);
+void			color(t_var *vari, int x, int y);
+void			draw(t_var *var);
+
 /*
 ** fractol.c
 */
-void	initvar(t_var *var);
-void	init_off(t_var *var);
-void	fractol(t_var *var);
+void			init_var(t_var *var);
+void			init_off(t_var *var);
+void			fractol(t_var *var);
+
 /*
 ** hook.c
 */
-void	black(t_var *var, int x, int y);
-void	color(t_var *vari, int x, int y);
-int		key_hook(int keycode, t_var *var);
-int		loop_hook(t_var *var);
-int		mouse_hook(int button, int x, int y, t_var *var);
+int				key_hook(int keycode, t_var *var);
+int				loop_hook(t_var *var);
+int				mouse_hook(int button, int x, int y, t_var *var);
+/*
+** julia.c
+*/
+void			julia(t_var *var);
+void			julia_algo(t_var *var);
+
+/*
+** mandelbrot.c
+*/
+void			mandelbrot(t_var *var);
+void			mandelbrot_algo(t_var *var);
 
 #endif
