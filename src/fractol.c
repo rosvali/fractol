@@ -20,6 +20,7 @@ void	initvar(t_var *var)
 	var->cy = 0;
 	var->tmp = 0;
 	var->i = 0;
+	var->r = 0;
 	var->maxi = 50;
 }
 

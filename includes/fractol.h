@@ -47,6 +47,7 @@ typedef struct	s_var
 	char	*name;
 	int		xmouse;
 	int		ymouse;
+	int		r;
 }				t_var;
 
 /*

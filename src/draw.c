@@ -94,8 +94,8 @@ void	julia(t_var *var)
 			var->cx = -0.7;
 			var->cy = 0.27015;
 			var->i = 0;
-			var->zx = var->xmouse - (x - WIDTH) / (var->zoom * WIDTH) + var->x_off;
-			var->zy = var->ymouse - (y - HEIGHT) / (var->zoom * HEIGHT) + var->y_off;
+			var->zx = (x - WIDTH) / (var->zoom * WIDTH) + var->x_off;
+			var->zy = (y - HEIGHT) / (var->zoom * HEIGHT) + var->y_off;
 			while (var->zx * var->zx + var->zy * var->zy < 4 && var->i < var->maxi)
 			{
 				var->tmp = var->zx * var->zx - var->zy * var->zy + var->cx;
