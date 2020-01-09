@@ -15,16 +15,16 @@
 
 # include <stdio.h>
 # include <math.h>
-# include "../lib/libft/libft.h"
-# include "../lib/minilibx/mlx.h"
-# define HEIGHT 1000
-# define WIDTH 1000
+# include "../libft/libft.h"
+# include "../minilibx/mlx.h"
+# define HEIGHT 700
+# define WIDTH 700
 
 typedef struct	s_mlx
 {
 	void	*ptr;
 	void	*window;
-	int		*img_data;
+	char	*img_data;
 	void	*img_ptr;
 	int		img_bpp;
 	int		img_endian;
@@ -45,6 +45,11 @@ typedef struct	s_var
 	int		i;
 	int		maxi;
 	char	*name;
+	int		r;
+	int		g;
+	int		b;
+	int		h;
+	int		w;
 }				t_var;
 
 /*
@@ -52,7 +57,6 @@ typedef struct	s_var
 */
 void			burningship(t_var *var);
 void			burningship_algo(t_var *var);
-
 /*
 ** draw.c
 */
@@ -60,26 +64,25 @@ double			ft_abs(double nbr);
 void			black(t_var *var, int x, int y);
 void			color(t_var *vari, int x, int y);
 void			draw(t_var *var);
-
 /*
 ** fractol.c
 */
 void			init_var(t_var *var);
 void			init_off(t_var *var);
 void			fractol(t_var *var);
-
 /*
 ** hook.c
 */
 int				key_hook(int keycode, t_var *var);
+int				color_hook(int keycode, t_var *var);
 int				loop_hook(t_var *var);
 int				mouse_hook(int button, int x, int y, t_var *var);
+int				motion_hook(int x, int y, t_var *var);
 /*
 ** julia.c
 */
 void			julia(t_var *var);
 void			julia_algo(t_var *var);
-
 /*
 ** mandelbrot.c
 */

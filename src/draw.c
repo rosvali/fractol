@@ -22,9 +22,9 @@ double		ft_abs(double nbr)
 
 void		black(t_var *var, int x, int y)
 {
-	var->mlx.img_data[((y * WIDTH + x)) + 2] = 0;
-	var->mlx.img_data[((y * WIDTH + x)) + 1] = 0;
-	var->mlx.img_data[((y * WIDTH + x))] = 0;
+	var->mlx.img_data[((y * WIDTH + x) * 4) + 2] = 0;
+	var->mlx.img_data[((y * WIDTH + x) * 4) + 1] = 0;
+	var->mlx.img_data[((y * WIDTH + x) * 4)] = 0;
 }
 
 void		color(t_var *var, int x, int y)
@@ -33,15 +33,12 @@ void		color(t_var *var, int x, int y)
 	unsigned char	g;
 	unsigned char	b;
 
-	// color->data[(((int)color->y * WIDTH + (int)color->x) * 4) + 2] = r;
-	// color->data[(((int)color->y * WIDTH + (int)color->x) * 4) + 1] = g;
-	// color->data[(((int)color->y * WIDTH + (int)color->x) * 4)] = b;
-	r = ((var->i * 255) / (var->maxi));
-	g = ((var->i * 255) / (var->maxi));
-	b = ((var->i * 255) / (var->maxi));
-	var->mlx.img_data[((y * WIDTH + x))] = r;
-	var->mlx.img_data[((y * WIDTH + x)) + 1] = g;
-	var->mlx.img_data[((y * WIDTH + x)) + 2] = b;
+	r = ((var->i * var->r) / (var->maxi));
+	g = ((var->i * var->g) / (var->maxi));
+	b = ((var->i * var->b) / (var->maxi));
+	var->mlx.img_data[((y * WIDTH + x) * 4)] = r;
+	var->mlx.img_data[((y * WIDTH + x) * 4) + 1] = g;
+	var->mlx.img_data[((y * WIDTH + x) * 4) + 2] = b;
 }
 
 void		draw(t_var *var)

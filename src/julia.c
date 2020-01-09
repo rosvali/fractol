@@ -40,8 +40,6 @@ void		julia(t_var *var)
 
 void		julia_algo(t_var *var)
 {
-	var->cx = -0.7;
-	var->cy = 0.27015;
 	var->i = 0;
 	while (var->zx * var->zx + var->zy * var->zy < 4 && var->i < var->maxi)
 	{

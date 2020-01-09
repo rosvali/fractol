@@ -3,12 +3,12 @@ CC = gcc
 
 SRC_PATH = ./src/
 OBJ_PATH = ./obj/
-LIB_PATH = ./lib/
+LIB_PATH = ./
 INC_PATH = ./includes/ $(LIB_PATH)libft/include/
 
 GCC_FLGS = -Werror -Wextra -Wall
 
-SRC_NAME = main.c fractol.c
+SRC_NAME = main.c fractol.c draw.c hook.c burningship.c julia.c mandelbrot.c
 
 GCC_LIBS = -lmlx -framework OpenGL -framework Appkit
 
@@ -17,8 +17,8 @@ LIB_NAME = libft
 
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
-INC = $(addprefix -I,$(INC_PATH))
-LIB = $(addprefix -L$(LIB_PATH),$(LIB_NAME))
+INC = $(addprefix -I, $(INC_PATH))
+LIB = $(addprefix -L$(LIB_PATH), $(LIB_NAME))
 
 all: $(NAME)
 	
@@ -32,7 +32,7 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 
 clean:
 		rm -fv $(OBJ)
-			make clean -C $(LIB_PATH)libft
+			make -C $(LIB_PATH)libft clean
 
 
 fclean: clean
