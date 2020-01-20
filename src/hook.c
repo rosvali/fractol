@@ -22,7 +22,6 @@ int		loop_hook(t_var *var)
 
 int		key_hook(int keycode, t_var *var)
 {
-	//printf("%d\n", keycode);
 	if (keycode == 53)
 		exit(0);
 	else if (keycode == 6)
@@ -64,16 +63,6 @@ int		color_hook(int keycode, t_var *var)
 
 int		mouse_hook(int button, int x, int y, t_var *var)
 {
-	printf("%d\n", button);
-	// if (x < WIDTH && y < HEIGHT)
-	// {
-	// 	var->mzx = x - (var->cx / 2);
-	// 	var->mzy = y - (var->cy / 2);
-	// 	var->zoom += 0.1;
-	// 	var->x_off += x / 2;
-	// 	var->y_off += y / 2;
-	// }
-	// }
 	if (button == 4)
 	{
 		var->zoom += 0.1;
@@ -81,27 +70,18 @@ int		mouse_hook(int button, int x, int y, t_var *var)
 		var->cy = (double)y - (HEIGHT / 2);
 		var->w -= var->cx;
 		var->h -= var->cy;
-		// var->x_off -= (double)x / var->zoom * var->zoom; //(double)x - (var->x_off / 2);
-		// var->y_off -= (double)y / var->zoom * var->zoom;//(double)y - (var->y_off / 2);
 	}
 	if (button == 5)
 	{
 		var->zoom -= 0.1;
 		var->cx = (double)x - (WIDTH / 2);
 		var->cy = (double)y - (HEIGHT / 2);
-		// var->x_off += 1.08;
-		// var->y_off += 1.08;
 	}
-	mlx_clear_window(var->mlx.ptr, var->mlx.window);
-	draw(var);
-	// mlx_put_image_to_window(var->mlx.ptr, var->mlx.window,
-	// 	var->mlx.img_ptr, 0, 0);
 	return (0);
 }
 
 int		motion_hook(int x, int y, t_var *var)
 {
-
 	if (x < WIDTH && y < HEIGHT)
 	{
 		if (ft_strcmp(var->name, "julia") == 0)
@@ -113,31 +93,5 @@ int		motion_hook(int x, int y, t_var *var)
 			var->mlx.img_ptr, 0, 0);
 		}
 	}
-	printf("%f\n", var->cx);
-	printf("%f\n", var->cy);
-	// mlx_put_image_to_window(var->mlx.ptr, var->mlx.window,
-	// 	var->mlx.img_ptr, 0, 0);
 	return (0);
 }
-
-// if (keycode == 4 || keycode == 1)
-// 	{
-// 		if (x < WIDTH && y < HEIGHT && y > 0)
-// 		{
-// 			param->xz = x - (param->x1 / 2);
-// 			param->yz = y - (param->y1 / 2);
-// 			param->x1 -= param->xz;
-// 			param->y1 -= param->yz;
-// 			param->zoom *= 1.5;
-// 		}
-// 	}
-// 	if (keycode == 5 || keycode == 2)
-// 	{
-// 		if (x < WIDTH && y < HEIGHT && y > 0)
-// 		{
-// 			param->xz = x - (param->x1 / 2);
-// 			param->yz = y - (param->y1 / 2);
-// 			param->x1 += param->xz;
-// 			param->y1 += param->yz;
-// 			param->zoom /= 2;
-// 		}

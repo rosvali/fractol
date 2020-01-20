@@ -35,7 +35,7 @@ void		mandelbrot(t_var *var)
 			y++;
 		}
 		x++;
-	} 
+	}
 }
 
 void		mandelbrot_algo(t_var *var)

@@ -18,7 +18,6 @@ int		main(int argc, char **argv)
 
 	if (argc == 2)
 	{
-		
 		if (ft_strcmp("mandelbrot", argv[1]) == 0 ||
 			ft_strcmp("burningship", argv[1]) == 0 ||
 			ft_strcmp("julia", argv[1]) == 0)
@@ -31,15 +30,9 @@ int		main(int argc, char **argv)
 			fractol(var);
 		}
 		else
-		{
-			write(1, "fractol: usage: 'mandelbrot'", 28);
-			write(1, " 'burningship' or 'julia'\n", 26);
-		}
+			ft_putendl("usage: 'mandelbrot' 'burningship' or 'julia'");
 	}
 	else
-	{
-		write(1, "fractol: usage: 'mandelbrot'", 28);
-		write(1, " 'burningship' or 'julia'\n", 26);
-	}
+		ft_putendl("usage: 'mandelbrot' 'burningship' or 'julia'");
 	return (0);
 }
