@@ -28,14 +28,16 @@ int		key_hook(int keycode, t_var *var)
 		var->zoom += 0.1;
 	else if (keycode == 7)
 		var->zoom -= 0.1;
-	else if (keycode == 2 || keycode == 124)
-		var->x_off += 0.1;
-	else if (keycode == 0 || keycode == 123)
-		var->x_off -= 0.1;
-	else if (keycode == 13 || keycode == 126)
-		var->y_off -= 0.1;
-	else if (keycode == 1 || keycode == 125)
-		var->y_off += 0.1;
+	else if (keycode == 124)
+		var->x_off += 0.01;
+	else if (keycode == 123)
+		var->x_off -= 0.01;
+	else if (keycode == 126)
+		var->y_off -= 0.01;
+	else if (keycode == 125)
+		var->y_off += 0.01;
+	else if (keycode == 1)
+		var->motion = (var->motion == 0) ? 1 : 0;
 	else if (keycode == 15 || keycode == 5 || keycode == 11)
 		color_hook(keycode, var);
 	return (0);
@@ -65,18 +67,27 @@ int		mouse_hook(int button, int x, int y, t_var *var)
 {
 	if (button == 4)
 	{
-		var->zoom += 0.1;
-		var->cx = (double)x - (WIDTH / 2);
-		var->cy = (double)y - (HEIGHT / 2);
-		var->w -= var->cx;
-		var->h -= var->cy;
+		var->zoom += 0.2;
+		// var->x_off -= 0.47 - var->zoom;
+		// var->y_off -= 0.42 - var->zoom;
+		// var->x_off -= ((double)x / WIDTH);
+		// var->y_off -= ((double)y / HEIGHT);
+		// var->x_off -= 100 / (double)x;
+		// var->y_off -= 100 / (double)y;
 	}
 	if (button == 5)
 	{
-		var->zoom -= 0.1;
-		var->cx = (double)x - (WIDTH / 2);
-		var->cy = (double)y - (HEIGHT / 2);
+		var->zoom -= 0.2;
+		// var->x_off += (double)x / WIDTH;
+		// var->y_off += (double)y / HEIGHT;
+		// var->x_off += 100 / (double)x;
+		// var->y_off += 100 / (double)y;
 	}
+	printf("%f\n", var->zoom);
+	printf("%f\n", var->x_off);
+	printf("%f\n", var->y_off);
+	printf("%d\n", x);
+	printf("%d\n", y);
 	return (0);
 }
 
@@ -84,7 +95,7 @@ int		motion_hook(int x, int y, t_var *var)
 {
 	if (x < WIDTH && y < HEIGHT)
 	{
-		if (ft_strcmp(var->name, "julia") == 0)
+		if (var->motion == 0 && ft_strcmp(var->name, "julia") == 0)
 		{
 			var->cx = (((double)x - (WIDTH / 2)) / 1000) * 2;
 			var->cy = (((double)y - (HEIGHT / 2)) / 1000) * 2;

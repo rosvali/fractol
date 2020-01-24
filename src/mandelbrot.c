@@ -16,17 +16,23 @@ void		mandelbrot(t_var *var)
 {
 	int		x;
 	int		y;
+	double x1 = -2.1;
+	double y1 = -1.2;
+	double x2 = 0.6;
+	double y2 = 1.2;
+	int zoomx = WIDTH / (x2 - x1);
+	int zoomy = HEIGHT / (y2 - y1);
 
 	x = 0;
 	y = 0;
 	init_var(var);
-	while (x < WIDTH)
+	while (x < var->w)
 	{
 		y = 0;
-		while (y < HEIGHT)
+		while (y < var->h)
 		{
-			var->cx = ((x - WIDTH) / (var->zoom * WIDTH) + var->x_off);
-			var->cy = ((y - HEIGHT) / (var->zoom * HEIGHT) + var->y_off);
+			var->cx = ((x - var->w) / (var->zoom * var->w) + var->x_off);
+			var->cy = ((y - var->h) / (var->zoom * var->h) + var->y_off);
 			mandelbrot_algo(var);
 			if (var->i == var->maxi)
 				black(var, x, y);
@@ -45,9 +51,12 @@ void		mandelbrot_algo(t_var *var)
 	var->zy = var->cy;
 	while (var->zx * var->zx + var->zy * var->zy < 4 && var->i < var->maxi)
 	{
-		var->tmp = var->zx * var->zx - var->zy * var->zy + var->cx;
-		var->zy = var->zx * var->zy + var->zx * var->zy + var->cy;
-		var->zx = var->tmp;
+		// var->tmp = var->zx * var->zx - var->zy * var->zy + var->cx;
+		// var->zy = var->zx * var->zy + var->zx * var->zy + var->cy;
+		// var->zx = var->tmp;
+		var->tmp = var->zx;
+		var->zx = var->zx * var->zx - var->zy * var->zy + var->cx;
+		var->zy = 2 * var->zy * var->tmp + var->cy;
 		var->i = var->i + 1;
 	}
 }
