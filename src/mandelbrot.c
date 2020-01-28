@@ -25,8 +25,8 @@ void		mandelbrot(t_var *var)
 		y = 0;
 		while (y < HEIGHT)
 		{
-			var->cx = ((x - WIDTH) / (var->zoom * WIDTH) + var->x_off);
-			var->cy = ((y - HEIGHT) / (var->zoom * HEIGHT) + var->y_off);
+			var->cx = (x - var->w / 2) / var->zoom + var->x_off;
+			var->cy = (y - var->h / 2) / var->zoom + var->y_off;
 			mandelbrot_algo(var);
 			if (var->i == var->maxi)
 				black(var, x, y);

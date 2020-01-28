@@ -50,6 +50,7 @@ typedef struct	s_var
 	int		b;
 	int		h;
 	int		w;
+	int		motion;
 }				t_var;
 
 /*

@@ -36,9 +36,9 @@ void		color(t_var *var, int x, int y)
 	r = ((var->i * var->r) / (var->maxi));
 	g = ((var->i * var->g) / (var->maxi));
 	b = ((var->i * var->b) / (var->maxi));
-	var->mlx.img_data[((y * WIDTH + x) * 4)] = r;
+	var->mlx.img_data[((y * WIDTH + x) * 4)] = b;
 	var->mlx.img_data[((y * WIDTH + x) * 4) + 1] = g;
-	var->mlx.img_data[((y * WIDTH + x) * 4) + 2] = b;
+	var->mlx.img_data[((y * WIDTH + x) * 4) + 2] = r;
 }
 
 void		draw(t_var *var)

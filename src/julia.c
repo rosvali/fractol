@@ -25,8 +25,8 @@ void		julia(t_var *var)
 		y = 0;
 		while (y < HEIGHT)
 		{
-			var->zx = (x - WIDTH) / (var->zoom * WIDTH) + var->x_off;
-			var->zy = (y - HEIGHT) / (var->zoom * HEIGHT) + var->y_off;
+			var->zx = (x - var->w / 2) / var->zoom + var->x_off;
+			var->zy = (y - var->h / 2) / var->zoom + var->y_off;
 			julia_algo(var);
 			if (var->i == var->maxi)
 				black(var, x, y);

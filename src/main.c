@@ -25,7 +25,6 @@ int		main(int argc, char **argv)
 			if (!(var = malloc(sizeof(t_var))))
 				return (0);
 			var->name = argv[1];
-			var->zoom = 0.3;
 			init_off(var);
 			fractol(var);
 		}

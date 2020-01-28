@@ -30,26 +30,26 @@ void	init_off(t_var *var)
 {
 	if (ft_strcmp("mandelbrot", var->name) == 0)
 	{
-		var->x_off = 1.1;
-		var->y_off = 1.6;
+		//var->x_off = 1.1;
+		//var->y_off = 1.6;
 	}
 	else if (ft_strcmp("burningship", var->name) == 0)
 	{
-		var->x_off = 1.2;
-		var->y_off = 1.1;
+		// var->x_off = 1.2;
+		// var->y_off = 1.1;
 	}
 	else if (ft_strcmp("julia", var->name) == 0)
 	{
-		var->x_off = 1.6;
-		var->y_off = 1.6;
-		var->cx = 0;
-		var->cy = 0;
+		// var->x_off = 1.6;
+		// var->y_off = 1.6;
 	}
 	var->r = 255;
 	var->g = 255;
 	var->b = 255;
 	var->w = WIDTH;
 	var->h = HEIGHT;
+	var->zoom = 200;
+	var->motion = 0;
 }
 
 void	fractol(t_var *var)
