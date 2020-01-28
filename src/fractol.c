@@ -33,7 +33,7 @@ void	init_off(t_var *var)
 		//var->x_off = 1.1;
 		//var->y_off = 1.6;
 	}
-	else if (ft_strcmp("burningship", var->name) == 0)
+	if (ft_strcmp("burningship", var->name) == 0)
 	{
 		// var->x_off = 1.2;
 		// var->y_off = 1.1;
@@ -43,6 +43,7 @@ void	init_off(t_var *var)
 		// var->x_off = 1.6;
 		// var->y_off = 1.6;
 	}
+	var->julia_motion = 0;
 	var->r = 255;
 	var->g = 255;
 	var->b = 255;
