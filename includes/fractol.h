@@ -17,8 +17,8 @@
 # include <math.h>
 # include "../libft/libft.h"
 # include "../minilibx/mlx.h"
-# define HEIGHT 700
-# define WIDTH 700
+# define HEIGHT 600
+# define WIDTH 600
 
 typedef struct	s_mlx
 {

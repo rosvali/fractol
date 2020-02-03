@@ -16,20 +16,14 @@ void		mandelbrot(t_var *var)
 {
 	int		x;
 	int		y;
-	double x1 = -2.1;
-	double y1 = -1.2;
-	double x2 = 0.6;
-	double y2 = 1.2;
-	int zoomx = WIDTH / (x2 - x1);
-	int zoomy = HEIGHT / (y2 - y1);
 
 	x = 0;
 	y = 0;
 	init_var(var);
-	while (x < var->w)
+	while (x < WIDTH)
 	{
 		y = 0;
-		while (y < var->h)
+		while (y < HEIGHT)
 		{
 			var->cx = (x - var->w / 2) / var->zoom + var->x_off;
 			var->cy = (y - var->h / 2) / var->zoom + var->y_off;

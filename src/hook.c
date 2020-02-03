@@ -61,13 +61,13 @@ int		color_hook(int keycode, t_var *var)
 
 int		mouse_hook(int button, int x, int y, t_var *var)
 {
-	if (button == 4)
+	if (button == 4 || button == 1)
 	{
 		var->zoom *= 1.5;
 		var->w -= x - var->w / 2;
 		var->h -= y - var->h / 2;
 	}
-	if (button == 5)
+	if (button == 5 || button == 2)
 	{
 		var->zoom /= 2;
 		var->w += x - var->w / 2;

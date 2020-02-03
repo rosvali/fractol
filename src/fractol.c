@@ -30,20 +30,20 @@ void	init_off(t_var *var)
 {
 	if (ft_strcmp("mandelbrot", var->name) == 0)
 	{
-		//var->x_off = 1.1;
-		//var->y_off = 1.6;
+		var->x_off = -0.6;
+		var->y_off = 0;
 	}
 	if (ft_strcmp("burningship", var->name) == 0)
 	{
-		// var->x_off = 1.2;
-		// var->y_off = 1.1;
+		var->x_off = -0.4;
+		var->y_off = -0.6;
 	}
 	else if (ft_strcmp("julia", var->name) == 0)
 	{
-		// var->x_off = 1.6;
-		// var->y_off = 1.6;
+		var->x_off = 0;
+		var->y_off = 0;
 	}
-	var->julia_motion = 0;
+	var->motion = 0;
 	var->r = 255;
 	var->g = 255;
 	var->b = 255;
@@ -51,6 +51,13 @@ void	init_off(t_var *var)
 	var->h = HEIGHT;
 	var->zoom = 200;
 	var->motion = 0;
+}
+
+void	delete(t_var *var)
+{
+	mlx_destroy_image(var->mlx.ptr, var->mlx.img_ptr);
+	mlx_destroy_window(var->mlx.ptr, var->mlx.window);
+	free(var->name);
 }
 
 void	fractol(t_var *var)
