@@ -43,18 +43,18 @@ int		color_hook(int keycode, t_var *var)
 {
 	if (keycode == 15)
 	{
-		var->r += 20;
-		var->r = var->r > 255 ? 0 : var->r;
+		var->r = var->r - 255;
+		var->r = (var->r == 255) ? 0 : var->r;
 	}
 	else if (keycode == 5)
 	{
-		var->g += 20;
-		var->g = var->g > 255 ? 0 : var->g;
+		var->g = var->g - 255;
+		var->g = (var->g == 255) ? 0 : var->g;
 	}
 	else if (keycode == 11)
 	{
-		var->b += 20;
-		var->b = var->b > 255 ? 0 : var->b;
+		var->b = var->b - 255;
+		var->b = (var->b == 255) ? 0 : var->b;
 	}
 	return (0);
 }

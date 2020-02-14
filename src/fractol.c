@@ -53,13 +53,6 @@ void	init_off(t_var *var)
 	var->motion = 0;
 }
 
-void	delete(t_var *var)
-{
-	mlx_destroy_image(var->mlx.ptr, var->mlx.img_ptr);
-	mlx_destroy_window(var->mlx.ptr, var->mlx.window);
-	free(var->name);
-}
-
 void	fractol(t_var *var)
 {
 	var->mlx.ptr = mlx_init();
