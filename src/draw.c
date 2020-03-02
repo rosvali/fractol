@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fractol.h"
+#include "fractol.h"
 
 double		ft_abs(double nbr)
 {
@@ -38,7 +38,7 @@ void		color(t_var *var, int x, int y)
 	b = ((var->i * var->b) / (var->maxi));
 	var->mlx.img_data[((y * WIDTH + x) * 4) + 2] = r;
 	var->mlx.img_data[((y * WIDTH + x) * 4) + 1] = g;
-	var->mlx.img_data[((y * WIDTH + x) * 4)] = b;	
+	var->mlx.img_data[((y * WIDTH + x) * 4)] = b;
 }
 
 void		draw(t_var *var)

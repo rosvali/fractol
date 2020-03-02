@@ -6,11 +6,11 @@
 /*   By: raguillo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:29:50 by raguillo          #+#    #+#             */
-/*   Updated: 2019/09/12 15:29:52 by raguillo         ###   ########.fr       */
+/*   Updated: 2020/03/02 14:22:02 by raguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fractol.h"
+#include "fractol.h"
 
 int		main(int argc, char **argv)
 {
@@ -33,6 +33,5 @@ int		main(int argc, char **argv)
 	}
 	else
 		ft_putendl("usage: 'mandelbrot' 'burningship' or 'julia'");
-	sleep(1000);
 	return (0);
 }

@@ -16,8 +16,7 @@ CC = gcc
 SRC_PATH = ./src/
 OBJ_PATH = ./obj/
 LIB_PATH = ./
-INC_PATH = ./includes/ $(LIB_PATH)libft/include/
-
+INC_PATH = ./includes ./libft/include
 GCC_FLGS = -Werror -Wextra -Wall
 
 SRC_NAME = main.c fractol.c draw.c hook.c burningship.c julia.c mandelbrot.c
